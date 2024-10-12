@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}  <!-- static 태그 로드 추가 -->
+
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <h2>Login</h2>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">User ID:</label>
+        <input type="text" name="username" class="input-field" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" class="input-field" required>
+
+        <button type="submit" class="btn">Login</button>
+    </form>
+
+    <a href="{% url 'signup' %}">Sign up here</a>
+{% endblock %}

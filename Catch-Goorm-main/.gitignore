@@ -1,0 +1,22 @@
+# Python bytecode files and cache directories
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Nginx and Docker specific
+*.log
+*.pid
+
+# Static files (if auto-generated)
+static/
+
+# Database initialization scripts (if containing sensitive info)
+init.sql
+
+media/
+
+# Ignore SQLite database file
+# db.sqlite3
+
+venv/

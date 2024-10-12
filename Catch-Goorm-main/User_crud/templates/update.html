@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}  <!-- static 태그 로드 -->
+
+{% block title %}Update Information{% endblock %}
+
+{% block content %}
+    <h2>Update Your Information</h2>
+    <div class="profile-container">
+        {% if user.avatar %}
+            <img id="profileImage" src="{{ user.avatar.url }}" alt="Profile image of {{ user.username }}" class="profile-image" onclick="triggerFileInput()">
+        {% else %}
+            <img id="profileImage" src="{% static 'images/default_profile.png' %}" alt="Default profile image" class="profile-image" onclick="triggerFileInput()">
+        {% endif %}
+        <br>
+        <div style="color: rgba(150, 150, 150, 0.514);">🔧 click to change</div>
+    </div>
+
+    <form name="updateForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        {% csrf_token %}
+        
+        <!-- 숨겨진 파일 입력 필드 -->
+        <input type="file" id="profileInput" name="profile_image" class="input-field" accept="image/*" style="display: none;" onchange="previewImage(event)">
+
+        <label for="username">User ID:</label>
+        <input type="text" name="username" class="input-field" value="{{ user.username }}" disabled>
+
+        <label for="first_name">Name:</label>
+        <input type="text" name="first_name" class="input-field" value="{{ user.first_name }}" required>
+
+        <label for="password">Password (leave blank if you don't want to change it):</label>
+        <input type="password" name="password" class="input-field">
+
+        <button type="submit" class="btn">Update</button>
+    </form>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+
+    <script>
+        // 이미지 클릭 시 파일 업로드 창을 열기 위한 함수
+        function triggerFileInput() {
+            document.getElementById('profileInput').click();
+        }
+
+        // 선택한 이미지를 미리보기로 보여주는 함수
+        function previewImage(event) {
+            const reader = new FileReader();
+            const profileImage = document.getElementById('profileImage');
+
+            reader.onload = function() {
+                if (reader.readyState === 2) {
+                    profileImage.src = reader.result;  // 선택한 이미지 미리보기
+                }
+            }
+
+            reader.readAsDataURL(event.target.files[0]);  // 파일 읽기
+        }
+
+        function validateForm() {
+            const firstName = document.forms["updateForm"]["first_name"].value;
+            const password = document.forms["updateForm"]["password"].value;
+
+            const nameRegex = /^[a-zA-Z가-힣]+$/;
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
+
+            if (!nameRegex.test(firstName)) {
+                alert("이름은 한글 또는 영어로만 입력할 수 있습니다.");
+                return false;
+            }
+
+            if (password && !passwordRegex.test(password)) {
+                alert("비밀번호는 8자리 이상이며, 영문자와 숫자를 모두 포함해야 합니다.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+{% endblock %}

@@ -96,12 +96,60 @@ git config --global credentail.helper store
 **Git의 3가지 작업 영역**
 git은 기본적으로 세 가지 작업 영역을 가진다.
 - workiing directory (working tree)
+    - 말 그대로 작업 디렉토리이며, 실제 프로젝트의 위치라고 할 수 있음.
 - staging 영역
+    - ~git add~ 한 파일들이 스테이지에 추가된다. commit 명령을 실행하면, staging 영역에 있는 파일들만 commit 된다.
 - repository
+    - 버전 관리 시스템이 변경 사항을 영구적으로 저장하는 곳이다.
 
-~git add~ , ~git commit~ , ~git push~, ~git pull~, 등 git 전반에 걸쳐 내재되어 있는 개념으로서, 이해가 안되면 외우시는 걸 추천 (면접에는 안나옴!)
+`git add` , `git commit` , `git push`, `git pull`, 등 git 전반에 걸쳐 내재되어 있는 개념으로서, 이해가 안되면 외우시는 걸 추천 (면접에는 안나옴!)
 
 ---
+
+## git status
+현재 *작업 디렉토리*의 상태를 보여준다.
+
+어떤 파일이 변경, 스테이징, 추적되지 않고 있는지 확인이 가능하다.
+
+```
+git status
+```
+
+---
+
+## git log
+이제까지 commit 된 이력 또는 내역을 보여준다.
+
+```
+git log
+```
+
+---
+
+## git remote
+commit들(저장본들)이 존재하는 Local repository의 내용을  Remote repository와 연결하기 위해 사용된다.
+
+💡 `origin`
+- `origin은 Git에서 원격 저장소를 가리키는 이름으로 자주 사용되는 관용적인 명칭이다. 따라서 다른 이름으로도 사용가능.
+- 예를 들어, 원격 저장소가 배포 서버라면 `production`이라고 할 수도 있고, 그냥 원격 github repository를 의미하는 remote라는 명칭을 쓸 수 도 있다.
+- 이 명칭은 `push`,`pull`,`fetch` 때에 쓰인다.
+- 보통은 관례적인 표현인 `origin` 을 사용한다.
+
+---
+
+## git push
+로컬 저장소에 있는 변경 사항을 원격 저장소에 업로드하는 git 명령.
+기본적인 `git push 명령은 다음과 같은 구조를 가진다.
+```
+git push [원격 저장소 이름: 관용적으로 origin] [로컬브랜치이름]:[원격브랜치이름]
+```
+
+`git push`를 실행하기 전에 로컬 저장소와 원격 저장소가 동기화되어 있어야 한다.
+동기화되지 않은 경우에는 `git pull` 명령을 사용하여 원격 저장소의 최신 변경 사항을 가져온 후에 `git push` 를 실행해야 한다
+
+---
+
+## git pull
 
 
 

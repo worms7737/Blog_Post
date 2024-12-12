@@ -30,3 +30,12 @@ echo '======== [2-3] Docker Compose 설치 ========'
 sudo apt-get update
 sudo apt-get install docker-compose-plugin
 
+# 프로젝트 클론 
+git clone [git@github.com:worms7737/load_test.git] 
+cd bootcampchat 
+# 백엔드 패키지 설치 
+cd backend 
+npm install 
+# 프론트엔드 패키지 설치 
+cd ../frontend 
+npm install

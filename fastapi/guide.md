@@ -19,7 +19,6 @@ Cmd + Shift + P 후 python interpreter 를 통해 생성한 venv로 인터프리
 
 ## default 로 주기
 
-
 ---
 
 ## fastapi 구동해보기
